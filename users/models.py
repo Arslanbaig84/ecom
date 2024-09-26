@@ -3,11 +3,11 @@ from django.db import models
 from django.contrib.auth.models import AbstractUser, Group, Permission
 from django.db import models
 from .manager import UserManager
-from base.models import ConcreteBaseModel
+from base.models import BaseModel
 
 # Create your models here.
-class  CustomUser(AbstractUser):
-    base = models.OneToOneField(ConcreteBaseModel, on_delete=models.CASCADE, related_name='customuser_base')
+class  CustomUser(BaseModel, AbstractUser):
+    id = None
     username = None
     email = models.EmailField(unique=True, null=False, blank=False)
     contact = models.CharField(max_length=20, unique=True)
