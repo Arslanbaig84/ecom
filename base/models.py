@@ -9,6 +9,3 @@ class BaseModel(models.Model):
 
     class Meta:
         abstract = True
-
-class ConcreteBaseModel(BaseModel):
-    description = models.TextField(null=True, blank=True) 
