@@ -11,12 +11,12 @@ class CustomUserAdmin(UserAdmin):
     model = CustomUser
 
     # Fields to be displayed in the admin panel
-    list_display = ('email', 'is_staff', 'is_active', 'is_superuser')
+    list_display = ('email', 'is_staff', 'is_active', 'is_superuser', 'contact', 'address')
     list_filter = ('is_staff', 'is_active', 'is_superuser')
 
     fieldsets = (
         (None, {'fields': ('email', 'password')}),
-        (_('Personal Info'), {'fields': ('first_name', 'last_name')}),
+        (_('Personal Info'), {'fields': ('first_name', 'last_name', 'contact', 'address')}),
         (_('Permissions'), {'fields': ('is_active', 'is_staff', 'is_superuser')}),
         (_('Important dates'), {'fields': ('last_login', 'date_joined')}),
     )
