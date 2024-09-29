@@ -1,5 +1,5 @@
 from django.shortcuts import render, redirect
-from .forms import CustomUserCreationForm
+from .forms import CustomUserCreationForm, CustomUserChangeForm
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib import messages
 from .models import CustomUser
@@ -48,3 +48,15 @@ def login_user(request):
             messages.info(request, 'Invalid Credentials')
             return redirect('login_user')
     return render(request, 'users/login_user.html')
+
+
+@login_required(redirect_field_name='login_user')
+def edit_profile(request):
+    if request.method == "POST":
+        form = CustomUserChangeForm(request.POST, instance=request.user)
+        if form.is_valid():
+            form.save()
+            messages.sucess(request, 'Profile update successfully.')
+            return redirect('profile')
+    form = CustomUserChangeForm(instance= request.user)
+    return render(request, 'users/edit_profile.html', {'form': form})

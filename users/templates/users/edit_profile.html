@@ -1,0 +1,47 @@
+{% extends 'base/layout.html' %}
+
+{% block title %}
+Register
+{% endblock %}
+
+{% block body %}
+<hr>
+<!-- templates/registration.html -->
+{% include 'base/message.html' %}
+
+<form action="{% url 'register' %}" method="post">
+    {% csrf_token %}
+
+    <div class="mb-3 row">
+        <label for="id_email" class="col-sm-2 col-form-label">Email:</label>
+        <div class="col-sm-10">
+            <input type="email" name="email" maxlength="254" class="form-control" autofocus required id="id_email" placeholder="{{user.email}}">
+        </div>
+        <hr>
+        <label for="id_first_name" class="col-sm-2 col-form-label">First Name:</label>
+        <div class="col-sm-10">
+            <input type="text" name="first_name" maxlength="150" class="form-control" id="id_first_name" placeholder="{{user.first_name}}">
+        </div>
+        <hr>
+        <label for="id_last_name" class="col-sm-2 col-form-label">Last Name:</label>
+        <div class="col-sm-10">
+            <input type="text" name="last_name" maxlength="150" class="form-control" id="id_last_name" placeholder="{{user.last_name}}">
+        </div>
+        <hr>
+        <label for="id_contact" class="col-sm-2 col-form-label">Contact:</label>
+        <div class="col-sm-10">
+            <input type="text" name="contact" maxlength="20" class="form-control" id="id_contact" placeholder="{{user.contact}}">
+        </div>
+        <hr>
+        <label for="id_address" class="col-sm-2 col-form-label">Address:</label>
+        <div class="col-sm-10">
+            <input type="text" name="address" maxlength="200" class="form-control" id="id_address" placeholder="{{user.address}}">
+        </div>
+    </div>
+    <hr>
+
+    <div class="col-auto">
+        <button type="submit" class="btn btn-primary mb-3">Submit</button>
+    </div>
+</form>
+{% endblock %}
