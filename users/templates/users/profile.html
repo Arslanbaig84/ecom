@@ -1,0 +1,41 @@
+{% extends 'base/layout.html' %}
+
+{% block title %}
+User Profile
+{% endblock %}
+
+
+{% block body %}
+{% include 'base/message.html' %}
+{% if user.is_authenticated %}
+<h1>Welcome, {{user.first_name}}</h1>
+<table class="table">
+    <tbody>
+      <tr>
+        <th scope="row">Email</th>
+        <td>{{user.email}}</td>
+      </tr>
+      <tr>
+        <th scope="row">First Name</th>
+        <td>{{user.first_name}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Last Name</th>
+        <td>{{user.last_name}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Contact</th>
+        <td>{{user.contact}}</td>
+      </tr>
+      <tr>
+        <th scope="row">Address</th>
+        <td>{{user.address}}</td>
+      </tr>
+    </tbody>
+  </table>
+  <a href="{% url 'edit_profile' %}">
+    <button class="btn btn-primary mb-3">Edit Profile</button>
+  </a>
+{% endif %}
+
+{% endblock %}
