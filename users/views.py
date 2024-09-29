@@ -56,7 +56,7 @@ def edit_profile(request):
         form = CustomUserChangeForm(request.POST, instance=request.user)
         if form.is_valid():
             form.save()
-            messages.sucess(request, 'Profile update successfully.')
+            messages.success(request, 'Profile update successfully.')
             return redirect('profile')
     form = CustomUserChangeForm(instance= request.user)
     return render(request, 'users/edit_profile.html', {'form': form})
