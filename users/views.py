@@ -3,6 +3,7 @@ from .forms import CustomUserCreationForm
 from django.contrib.auth import authenticate, login, logout, update_session_auth_hash
 from django.contrib import messages
 from .models import CustomUser
+from django.contrib.auth.decorators import login_required
 
 # Create your views here.
 def register(request):
@@ -27,3 +28,23 @@ def register(request):
 
     form = CustomUserCreationForm()
     return render(request, 'users/register.html', {'form': form})
+
+
+@login_required(redirect_field_name='login_user')
+def profile(request):
+    return render(request, 'users/profile.html')
+
+
+def login_user(request):
+    if request.method == 'POST':
+        email = request.POST.get('email')
+        password = request.POST.get('password')
+        user = authenticate(request, email=email, password=password)
+        if user:
+            login(user)
+            messages.success(request, 'Login Successful')
+            return redirect('profile')
+        else:
+            messages.info(request, 'Invalid Credentials')
+            return redirect('login_user')
+    return render(request, 'users/login_user.html')
