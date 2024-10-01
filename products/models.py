@@ -19,7 +19,7 @@ class Category(BaseModel):
 class Product(BaseModel):
     product_name = models.CharField(max_length=200)
     product_slug = models.SlugField(unique=True, null=True, blank=True)
-    product_categoty = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='product')
+    product_category = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='product')
     product_price = models.PositiveIntegerField()
     product_description = models.TextField(max_length=500)
 
