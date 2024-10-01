@@ -30,7 +30,7 @@ def register(request):
     return render(request, 'users/register.html', {'form': form})
 
 
-@login_required(redirect_field_name='login_user')
+@login_required(login_url="/users/login_user/")
 def profile(request):
     return render(request, 'users/profile.html')
 
@@ -50,7 +50,7 @@ def login_user(request):
     return render(request, 'users/login_user.html')
 
 
-@login_required(redirect_field_name='login_user')
+@login_required(login_url="/users/login_user/")
 def edit_profile(request):
     if request.method == "POST":
         form = CustomUserChangeForm(request.POST, instance=request.user)
@@ -62,7 +62,7 @@ def edit_profile(request):
     return render(request, 'users/edit_profile.html', {'form': form})
 
 
-@login_required(redirect_field_name='login_user')
+@login_required(login_url="/users/login_user/")
 def logout_user(request):
     logout(request)
     messages.info(request, 'Logout Sueccesful')
