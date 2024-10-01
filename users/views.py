@@ -41,7 +41,7 @@ def login_user(request):
         password = request.POST.get('password')
         user = authenticate(request, email=email, password=password)
         if user:
-            login(user)
+            login(request, user)
             messages.success(request, 'Login Successful')
             return redirect('profile')
         else:
@@ -60,3 +60,10 @@ def edit_profile(request):
             return redirect('profile')
     form = CustomUserChangeForm(instance= request.user)
     return render(request, 'users/edit_profile.html', {'form': form})
+
+
+@login_required(redirect_field_name='login_user')
+def logout_user(request):
+    logout(request)
+    messages.info(request, 'Logout Sueccesful')
+    return redirect('login_user')
