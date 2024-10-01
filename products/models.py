@@ -21,7 +21,7 @@ class Product(BaseModel):
     product_slug = models.SlugField(unique=True, null=True, blank=True)
     product_categoty = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='product')
     product_price = models.PositiveIntegerField()
-    product_desctiption = models.TextField(max_length=500)
+    product_description = models.TextField(max_length=500)
 
     def save(self, *args, **kwargs):
         self.product_slug = slugify(self.product_name)
