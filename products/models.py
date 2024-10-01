@@ -14,3 +14,18 @@ class Category(BaseModel):
 
     def __str__(self) -> str:
         return self.category_name
+    
+
+class Product(BaseModel):
+    product_name = models.CharField(max_length=200)
+    product_slug = models.SlugField(unique=True, null=True, blank=True)
+    product_categoty = models.ForeignKey(Category, on_delete=models.CASCADE, related_name='product')
+    product_price = models.PositiveIntegerField()
+    product_desctiption = models.TextField(max_length=500)
+
+    def save(self, *args, **kwargs):
+        self.product_slug = slugify(self.product_name)
+        super(Product, self).save(*args, **kwargs)
+
+    def __str__(self) -> str:
+        return self.product_name
