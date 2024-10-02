@@ -17,6 +17,7 @@ Products
             </div>
         </div>
         {% for item in items_images %}
+        <p>Slug: {{ item.product.product_slug }}</p>
         <div class="row">
             <div class="col-lg-3 col-md-6 col-12">
                 <!-- Start Single Product -->
@@ -31,7 +32,7 @@ Products
                         <span class="category"></span>
                         <h4 class="title">{{item.product.product_category.category_name}}</h4>
                         <h4 class="title">
-                            <a href="#">{{item.product.product_name}}</a>
+                            <a href="{% url 'product' item.product.product_slug %}">{{item.product.product_name}}</a>
                         </h4>
                         <ul class="review">
                             <li><i class="lni lni-star-filled"></i></li>

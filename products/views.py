@@ -10,5 +10,13 @@ def products(request):
     for product in products:
         first_image = product.product_image.first()  # Get the first image for each product
         items_images.append({'product': product, 'first_image': first_image})
+        # Example of how to print each product's slug
+    for item in items_images:
+        print(item['product'].product_slug)  # Accessing the product slug properly
     
     return render(request, 'products/products.html', {'items_images': items_images})
+
+
+def product(request, product_slug):
+    product = Product.objects.filter(product_slug=product_slug)
+    return render(request, 'products/product.html', {'product' : product})
