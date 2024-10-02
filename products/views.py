@@ -12,3 +12,8 @@ def products(request):
         items_images.append({'product': product, 'first_image': first_image})
     
     return render(request, 'products/products.html', {'items_images': items_images})
+
+
+def product(request, product_slug):
+    product = Product.objects.get(product_slug=product_slug)
+    return render(request, 'products/product.html', {'product' : product})
