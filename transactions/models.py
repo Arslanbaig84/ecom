@@ -12,7 +12,7 @@ class Cart(BaseModel):
         return f'cart of self.user.email'
 
     def total_price(self):
-        return sum(item.price() for item in cart_items.price.all())    
+        return sum(item.price() for item in self.cart_items.all())    
 
 class CartItem(BaseModel):
     cart = models.ForeignKey(Cart, on_delete=models.CASCADE, related_name='cart_items')
