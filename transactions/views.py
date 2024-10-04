@@ -30,4 +30,5 @@ def add_to_cart(request, product_slug):
 
 @login_required(login_url="/users/login_user/")
 def cart(request):
-    pass
+    cart = Cart.objects.get(user=request.user)
+    return render(request, 'transactions/cart.html', {'cart':cart})

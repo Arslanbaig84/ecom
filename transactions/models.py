@@ -19,7 +19,7 @@ class CartItem(BaseModel):
     product = models.ForeignKey(Product, on_delete=models.CASCADE, related_name='product_items')
 
     def __str__(self) -> str:
-        return f"self. product.product_name"
+        return f"self.product.product_name"
     
     def price(self):
-        return self.product.product_price * self.quantity
+        return self.product.product_price
