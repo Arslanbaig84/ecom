@@ -33,8 +33,8 @@
                       <p><span class="text-muted">Size: </span>M <span class="text-muted">Color: </span>Grey</p>
                     </div>
                     <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-
-                        <select name="quantity" id="item_quantity" class="form-select form-select-sm" required>
+                      <form action="{% url 'order' %}" method="POST" class="form-control">
+                        <select name="quantity_{{item.product.product_slug}}" id="item_quantity" class="form-select form-select-sm" required>
                           <option value="" disabled selected>Select Quantity</option>
                           <option value="1">1</option>
                           <option value="2">2</option>
@@ -42,7 +42,7 @@
                           <option value="4">4</option>
                           <option value="5">5</option>
                         </select>   
-      
+                      </form>
                     </div>
                     <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1" style="width: fit-content;">
                       <h5 class="mb-0">Unit Price: Rs.{{item.price}}</h5>
