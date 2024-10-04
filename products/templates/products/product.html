@@ -6,6 +6,7 @@
 
 {% block body %}
     <!-- Start Item Details -->
+    {% include 'base/message.html' %} 
     <section class="item-details section">
         <div class="container">
             <div class="top-area">
@@ -32,10 +33,10 @@
                             <h2 class="title">{{product.product_name}}</h2>
                             <p class="category"><i class="lni lni-tag"></i> {{product.product_category.category_name}}
                                 <a href="javascript:void(0)">{{product.product_slug}}</a>
-                                <a href="#">
+                                <a href="{% url 'add_to_cart' product.product_slug %}">
                                     <button class="btn btn-primary">Add to Cart</button>
                                 </a>
-                            </p> 
+                            </p>
                             <h3 class="price">Price : Rs {{product.product_price}}</h3>
                             <p class="info-text">Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod
                                 tempor incididunt

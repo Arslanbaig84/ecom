@@ -5,6 +5,7 @@ Products
 {% endblock %}
 
 {% block body %}
+{% include 'base/message.html' %}
 <section class="trending-product section" style="margin-top: 12px;">
     <div class="container">
         <div class="row">
@@ -25,7 +26,7 @@ Products
                     <div class="product-image">
                         <img src="{{item.first_image.image.url}}" alt="{{item.product.product_name}}" style="height: 200px;">
                         <div class="button">
-                            <a href="#" class="btn btn-primary"><i class="lni lni-cart"></i> Add to Cart</a>
+                            <a href="{% url 'add_to_cart' item.product.product_slug %}" class="btn btn-primary"><i class="lni lni-cart"></i> Add to Cart</a>
                         </div>
                     </div>
                     <div class="product-info">
