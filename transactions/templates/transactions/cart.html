@@ -7,6 +7,7 @@
 {% block body %}
 {% include 'base/message.html' %}
     <!-- Start Cart Details -->
+     {% if cart.is_active %}
     <section class="h-100">
         <div class="container h-100 py-5">
           <div class="row d-flex justify-content-center align-items-center h-100">
@@ -20,8 +21,9 @@
                 </div>
               </div>
 
+              <form action="{% url 'order' %}" method="POST" class="form-control">
               {% for item in cart.cart_items.all %}
-
+                {% csrf_token %}
               <div class="card rounded-3 mb-4">
                 <div class="card-body p-4">
                   <div class="row d-flex justify-content-between align-items-center">
@@ -33,7 +35,6 @@
                       <p><span class="text-muted">Size: </span>M <span class="text-muted">Color: </span>Grey</p>
                     </div>
                     <div class="col-md-3 col-lg-3 col-xl-2 d-flex">
-                      <form action="{% url 'order' %}" method="POST" class="form-control">
                         <select name="quantity_{{item.product.product_slug}}" id="item_quantity" class="form-select form-select-sm" required>
                           <option value="" disabled selected>Select Quantity</option>
                           <option value="1">1</option>
@@ -42,7 +43,6 @@
                           <option value="4">4</option>
                           <option value="5">5</option>
                         </select>   
-                      </form>
                     </div>
                     <div class="col-md-3 col-lg-2 col-xl-2 offset-lg-1" style="width: fit-content;">
                       <h5 class="mb-0">Unit Price: Rs.{{item.price}}</h5>
@@ -53,7 +53,6 @@
                   </div>
                 </div>
               </div>
-              {% endfor %}
               <div class="card mb-4">
                 <div class="card-body p-4 d-flex flex-row">
                   <div data-mdb-input-init class="form-outline flex-fill">
@@ -66,13 +65,14 @@
       
               <div class="card">
                 <div class="card-body">
-                  <button  type="button" data-mdb-button-init data-mdb-ripple-init class="btn btn-warning btn-block btn-lg">Confirm Order</button>
+                  <button  type="submit" data-mdb-button-init data-mdb-ripple-init class="btn btn-warning btn-block btn-lg">Confirm Order</button>
                 </div>
               </div>
-      
+              {% endfor %}
+            </form>
             </div>
           </div>
         </div>
     </section>
-    
+    {% endif %}
 {% endblock %}

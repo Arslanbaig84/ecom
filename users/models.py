@@ -15,3 +15,6 @@ class  CustomUser(BaseModel, AbstractUser):
     REQUIRED_FIELDS = ['contact', 'address']
 
     objects = UserManager()
+
+    def __str__(self) -> str:
+        return f"self.email"
