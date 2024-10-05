@@ -8,6 +8,9 @@ class Cart(BaseModel):
     user = models.ForeignKey(CustomUser, on_delete=models.CASCADE, related_name='cart')
     is_active = models.BooleanField(default=True)
 
+    class Meta:
+        unique_together = ('user', 'is_active')
+
     def __str__(self) -> str:
         return f'cart of self.user.email'
 

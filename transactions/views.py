@@ -7,23 +7,25 @@ from django.contrib import messages
 # Create your views here.
 @login_required(login_url="/users/login_user/")
 def add_to_cart(request, product_slug):
-    # Get the current user
     user = request.user
 
-    # Fetch the product based on slug
+    # Fetch the product
     product = get_object_or_404(Product, product_slug=product_slug)
 
-    # Check if the user already has an active cart, create one if not
+    # Get or create an active cart for the user
     cart, created = Cart.objects.get_or_create(user=user, is_active=True)
 
-    # Check if the product is already in the cart
-    cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
+    try:
+        # Get or create cart item
+        cart_item, created = CartItem.objects.get_or_create(cart=cart, product=product)
 
-    if created:
-        cart_item.save()
-        messages.success(request, 'Product added to cart.')
-    else:
-        messages.info(request, 'Product already in cart.')
+        if created:
+            messages.success(request, 'Product added to cart.')
+        else:
+            messages.info(request, 'Product already in cart.')
+    
+    except Exception as e:
+        messages.error(request, 'There was an issue adding the product to the cart.')
 
     return redirect(request.META.get('HTTP_REFERER', '/'))
 
